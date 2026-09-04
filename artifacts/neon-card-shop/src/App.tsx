@@ -398,7 +398,7 @@ function App() {
         <header className="topbar rise-in">
           <a href="#top" className="brand-mark" data-testid="link-home">
             <span className="brand-symbol"><Zap size={19} fill="currentColor" /></span>
-            <span className="brand-name">neon <span style={{ color: 'hsl(var(--secondary))' }}>card shop</span></span>
+            <span className="brand-name">Card <span style={{ color: 'hsl(var(--secondary))' }}>Hub</span></span>
           </a>
           <div className="topbar-actions">
             <button className="icon-button" type="button" aria-label="Help and support" onClick={() => scrollTo('more')} data-testid="button-help"><CircleHelp size={18} /></button>
@@ -489,7 +489,7 @@ function App() {
 
         <footer className="section" id="more" style={{ paddingBottom: 24 }}>
           <div className="glass" style={{ borderRadius: 20, padding: 20 }}>
-            <div className="footer-heading"><div className="eyebrow">Neon card shop / studio 01</div></div>
+            <div className="footer-heading"><div className="eyebrow">Card Hub / studio 01</div></div>
             <p className="muted" style={{ maxWidth: 530, lineHeight: 1.5, fontSize: '.76rem', marginBottom: 0 }}>A vivid storefront for fictional prepaid rewards cards. Sample masked details are for display only. This is not a bank, credit product, or real payment service.</p>
           </div>
         </footer>
