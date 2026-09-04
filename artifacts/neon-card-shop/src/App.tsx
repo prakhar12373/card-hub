@@ -223,7 +223,7 @@ function PurchaseDialog({ card, onClose }: { card: RewardCard; onClose: () => vo
   );
 }
 
-function AdminPanel({ productCount, onAdd, onClose }: { productCount: number; onAdd: (card: RewardCard) => void; onClose: () => void }) {
+function AdminPage({ products, onAdd }: { products: RewardCard[]; onAdd: (card: RewardCard) => void }) {
   const [name, setName] = useState('');
   const [network, setNetwork] = useState<Exclude<Category, 'All cards'>>('Mastercard');
   const [price, setPrice] = useState('');
@@ -259,30 +259,68 @@ function AdminPanel({ productCount, onAdd, onClose }: { productCount: number; on
   };
 
   return (
-    <div className="dialog-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-      <section className="dialog admin-dialog" role="dialog" aria-modal="true" aria-labelledby="admin-title" data-testid="dialog-admin-panel">
-        <div className="dialog-head">
-          <div>
-            <div className="eyebrow">Store admin / catalog</div>
-            <h2 id="admin-title">Admin studio</h2>
-          </div>
-          <button className="close-button" type="button" onClick={onClose} aria-label="Close admin panel" data-testid="button-close-admin"><X size={18} /></button>
+    <main className="admin-page">
+      <div className="admin-page-wrap">
+        <header className="admin-topbar">
+          <a href="/" className="brand-mark" data-testid="link-admin-home">
+            <span className="brand-symbol"><Zap size={19} fill="currentColor" /></span>
+            <span className="brand-name">neon <span style={{ color: 'hsl(var(--secondary))' }}>card shop</span></span>
+          </a>
+          <span className="admin-badge"><Gift size={13} /> Admin only</span>
+        </header>
+
+        <section className="admin-hero">
+          <div className="eyebrow">Private catalog workspace</div>
+          <h1>Manage your<br /><span>card collection.</span></h1>
+          <p>Add products here and they will appear in the customer storefront. This page is separate from the shopping experience, so customers never see catalog controls.</p>
+        </section>
+
+        <div className="admin-layout">
+          <section className="admin-card" aria-labelledby="admin-title">
+            <div className="admin-card-head">
+              <div>
+                <div className="eyebrow">Catalog editor</div>
+                <h2 id="admin-title">Add a product</h2>
+              </div>
+              <div className="admin-count"><strong>{products.length}</strong><span>live products</span></div>
+            </div>
+            <div className="admin-form">
+              <label className="admin-field admin-field-wide"><span>Product name</span><input value={name} onChange={(event) => setName(event.target.value)} placeholder="e.g. Sunset Rewards" data-testid="input-product-name" /></label>
+              <label className="admin-field"><span>Network</span><select value={network} onChange={(event) => setNetwork(event.target.value as Exclude<Category, 'All cards'>)} data-testid="select-product-network"><option>Mastercard</option><option>Visa</option><option>Rupay</option></select></label>
+              <label className="admin-field"><span>Fixed price (₹)</span><input type="number" min="1" step="1" value={price} onChange={(event) => setPrice(event.target.value)} placeholder="699" data-testid="input-product-price" /></label>
+              <label className="admin-field"><span>Limit label</span><input value={limit} onChange={(event) => setLimit(event.target.value)} placeholder="₹75k" /></label>
+              <label className="admin-field"><span>Expiry label</span><input value={expiry} onChange={(event) => setExpiry(event.target.value)} placeholder="12/30" /></label>
+              <label className="admin-field"><span>Badge</span><input value={tag} onChange={(event) => setTag(event.target.value)} placeholder="New drop" /></label>
+              <label className="admin-field"><span>Card mood</span><select value={tone} onChange={(event) => setTone(event.target.value as RewardCard['tone'])}><option value="hot">Hot</option><option value="cool">Cool</option></select></label>
+            </div>
+            {formError && <p className="upload-error" role="alert">{formError}</p>}
+            <button className="submit-payment" type="button" onClick={handleAdd} data-testid="button-add-product"><Gift size={17} /> Add product to storefront <ArrowRight size={17} /></button>
+            <p className="dialog-foot">Products added here use a fixed price and appear in the customer shop immediately.</p>
+          </section>
+
+          <section className="admin-card product-list-card" aria-labelledby="product-list-title">
+            <div className="admin-card-head">
+              <div>
+                <div className="eyebrow">Storefront inventory</div>
+                <h2 id="product-list-title">Live products</h2>
+              </div>
+              <PackageCheck className="admin-list-icon" size={22} />
+            </div>
+            <div className="admin-product-list">
+              {products.map((product) => (
+                <div className="admin-product-row" key={product.id} data-testid={`admin-product-${product.id}`}>
+                  <div className={`admin-product-swatch ${product.tone}`} />
+                  <div><strong>{product.name}</strong><span>{product.network} · {product.tag}</span></div>
+                  <b>{formatMoney(product.price)}</b>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
-        <div className="admin-summary"><span><strong>{productCount}</strong> products live</span><span>Saved on this browser</span></div>
-        <div className="admin-form">
-          <label className="admin-field admin-field-wide"><span>Product name</span><input value={name} onChange={(event) => setName(event.target.value)} placeholder="e.g. Sunset Rewards" data-testid="input-product-name" /></label>
-          <label className="admin-field"><span>Network</span><select value={network} onChange={(event) => setNetwork(event.target.value as Exclude<Category, 'All cards'>)} data-testid="select-product-network"><option>Mastercard</option><option>Visa</option><option>Rupay</option></select></label>
-          <label className="admin-field"><span>Fixed price (₹)</span><input type="number" min="1" step="1" value={price} onChange={(event) => setPrice(event.target.value)} placeholder="699" data-testid="input-product-price" /></label>
-          <label className="admin-field"><span>Limit label</span><input value={limit} onChange={(event) => setLimit(event.target.value)} placeholder="₹75k" /></label>
-          <label className="admin-field"><span>Expiry label</span><input value={expiry} onChange={(event) => setExpiry(event.target.value)} placeholder="12/30" /></label>
-          <label className="admin-field"><span>Badge</span><input value={tag} onChange={(event) => setTag(event.target.value)} placeholder="New drop" /></label>
-          <label className="admin-field"><span>Card mood</span><select value={tone} onChange={(event) => setTone(event.target.value as RewardCard['tone'])}><option value="hot">Hot</option><option value="cool">Cool</option></select></label>
-        </div>
-        {formError && <p className="upload-error" role="alert">{formError}</p>}
-        <button className="submit-payment" type="button" onClick={handleAdd} data-testid="button-add-product"><Gift size={17} /> Add product <ArrowRight size={17} /></button>
-        <p className="dialog-foot">Products added here use a fixed price and appear in the storefront immediately.</p>
-      </section>
-    </div>
+
+        <a className="admin-back-link" href="/" data-testid="link-back-to-shop"><ArrowRight size={15} /> Back to customer storefront</a>
+      </div>
+    </main>
   );
 }
 
@@ -306,7 +344,6 @@ function BottomNav({ active, onNavigate }: { active: string; onNavigate: (target
 function App() {
   const [category, setCategory] = useState<Category>('All cards');
   const [selectedCard, setSelectedCard] = useState<RewardCard | null>(null);
-  const [adminOpen, setAdminOpen] = useState(false);
   const [productCards, setProductCards] = useState<RewardCard[]>(() => {
     try {
       const saved = window.localStorage.getItem('neon-card-shop-products');
@@ -345,6 +382,9 @@ function App() {
 
   const visibleCards = category === 'All cards' ? productCards : productCards.filter((card) => card.network === category);
   const addProduct = (card: RewardCard) => setProductCards((current) => [card, ...current]);
+  if (window.location.pathname === '/admin') {
+    return <AdminPage products={productCards} onAdd={addProduct} />;
+  }
   const scrollTo = (id: string) => {
     setActiveNav(id);
     const target = document.getElementById(id === 'cards' ? 'card-catalog' : id === 'reviews' ? 'reviews' : 'delivery');
@@ -449,7 +489,7 @@ function App() {
 
         <footer className="section" id="more" style={{ paddingBottom: 24 }}>
           <div className="glass" style={{ borderRadius: 20, padding: 20 }}>
-            <div className="footer-heading"><div className="eyebrow">Neon card shop / studio 01</div><button className="admin-link" type="button" onClick={() => setAdminOpen(true)} data-testid="button-open-admin"><Gift size={14} /> Manage products</button></div>
+            <div className="footer-heading"><div className="eyebrow">Neon card shop / studio 01</div></div>
             <p className="muted" style={{ maxWidth: 530, lineHeight: 1.5, fontSize: '.76rem', marginBottom: 0 }}>A vivid storefront for fictional prepaid rewards cards. Sample masked details are for display only. This is not a bank, credit product, or real payment service.</p>
           </div>
         </footer>
@@ -457,7 +497,6 @@ function App() {
 
       <BottomNav active={activeNav} onNavigate={scrollTo} />
       {selectedCard && <PurchaseDialog card={selectedCard} onClose={() => setSelectedCard(null)} />}
-      {adminOpen && <AdminPanel productCount={productCards.length} onAdd={addProduct} onClose={() => setAdminOpen(false)} />}
     </main>
   );
 }
