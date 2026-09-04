@@ -150,9 +150,9 @@ function PurchaseDialog({ card, onClose }: { card: RewardCard; onClose: () => vo
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const amount = card.price;
-  const upiValue = `upi://pay?pa=paytm@ptyes&pn=Neon%20Card%20Shop&am=${amount}&cu=INR`;
+   const upiValue = `upi://pay?pa=9507703810@nyes&pn=Neon%20Card%20Shop&am=${amount}&cu=INR`;
   const copyHandle = () => {
-    void navigator.clipboard?.writeText('paytm@ptyes');
+     void navigator.clipboard?.writeText('9507703810@nyes');
   };
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const nextFile = event.target.files?.[0];
@@ -199,7 +199,7 @@ function PurchaseDialog({ card, onClose }: { card: RewardCard; onClose: () => vo
             <p>Scan to pay the fixed card price</p>
             <b>{formatMoney(amount)}</b>
             <p style={{ marginTop: 16 }}>UPI payee handle</p>
-            <b>{'paytm@ptyes'} <button className="text-button" type="button" onClick={copyHandle} data-testid="button-copy-upi"><Copy size={12} /> Copy</button></b>
+             <b>{'9507703810@nyes'} <button className="text-button" type="button" onClick={copyHandle} data-testid="button-copy-upi"><Copy size={12} /> Copy</button></b>
           </div>
         </div>
         <div className="fixed-price">
