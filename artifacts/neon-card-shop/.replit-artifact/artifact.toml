@@ -1,6 +1,6 @@
 kind = "web"
 previewPath = "/"
-title = "Neon Card Shop"
+title = "Card Hub"
 description = "A mobile-first neon storefront for fictional prepaid rewards cards, with offer discovery, testimonials, activity feed, and a selected-plan UPI demo checkout."
 version = "1.0.0"
 id = "artifacts/neon-card-shop"
