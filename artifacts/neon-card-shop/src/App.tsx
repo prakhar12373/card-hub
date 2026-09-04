@@ -43,6 +43,16 @@ const defaultCards: RewardCard[] = [
   { id: 'visa-gold', network: 'Visa', name: 'Visa Gold', price: 599, limit: '₹68k', expiry: '08/29', buyers: '3,87,420+', tone: 'cool', tag: 'Instant delivery' },
   { id: 'visa-premium', network: 'Visa', name: 'Visa Premium', price: 972, was: 1200, limit: '₹1.2L', expiry: '02/31', buyers: '1,64,880+', tone: 'cool', tag: 'Premium pick' },
   { id: 'rupay-elite', network: 'Rupay', name: 'Rupay Elite', price: 799, was: 950, limit: '₹91k', expiry: '05/30', buyers: '2,08,610+', tone: 'hot', tag: 'Fast favourite' },
+  { id: 'mc-titanium', network: 'Mastercard', name: 'Mastercard Titanium', price: 899, was: 1099, limit: '₹1.1L', expiry: '04/28', buyers: '1,92,300+', tone: 'hot', tag: 'Travel privileges' },
+  { id: 'visa-classic', network: 'Visa', name: 'Visa Classic', price: 299, limit: '₹45k', expiry: '09/27', buyers: '5,21,100+', tone: 'cool', tag: 'Starter choice' },
+  { id: 'rupay-select', network: 'Rupay', name: 'Rupay Select', price: 699, was: 899, limit: '₹85k', expiry: '12/31', buyers: '3,14,500+', tone: 'cool', tag: 'Cashback special' },
+  { id: 'mc-world', network: 'Mastercard', name: 'Mastercard World', price: 1299, was: 1599, limit: '₹2.5L', expiry: '06/32', buyers: '98,400+', tone: 'hot', tag: 'Lounge access' },
+  { id: 'visa-infinite', network: 'Visa', name: 'Visa Infinite', price: 1499, was: 1999, limit: '₹3.0L', expiry: '01/30', buyers: '75,200+', tone: 'cool', tag: 'Ultra luxury' },
+  { id: 'rupay-platinum', network: 'Rupay', name: 'Rupay Platinum', price: 399, limit: '₹55k', expiry: '03/29', buyers: '4,50,800+', tone: 'hot', tag: 'UPI enabled' },
+  { id: 'mc-black', network: 'Mastercard', name: 'Mastercard Black Edition', price: 1799, was: 2199, limit: '₹4.5L', expiry: '10/31', buyers: '42,100+', tone: 'hot', tag: 'VIP Concierge' },
+  { id: 'visa-signature', network: 'Visa', name: 'Visa Signature', price: 1099, was: 1399, limit: '₹1.8L', expiry: '07/28', buyers: '1,45,900+', tone: 'cool', tag: 'Dining perks' },
+  { id: 'rupay-prime', network: 'Rupay', name: 'Rupay Prime', price: 499, limit: '₹72k', expiry: '11/29', buyers: '2,89,600+', tone: 'cool', tag: 'Fuel surcharge waiver' },
+  { id: 'visa-smart', network: 'Visa', name: 'Visa Smart Saver', price: 199, limit: '₹35k', expiry: '05/27', buyers: '6,10,200+', tone: 'hot', tag: 'Zero annual fee' },
 ];
 
 const reviews = [
