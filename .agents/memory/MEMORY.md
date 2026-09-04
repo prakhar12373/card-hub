@@ -1,0 +1,1 @@
+- [Artifact dependency installs](artifact-dependency-installs.md) — in this pnpm monorepo, scope package installs to the target artifact rather than the workspace root.

@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Neon Card Shop"
+description = "A mobile-first neon storefront for fictional prepaid rewards cards, with offer discovery, testimonials, activity feed, and a selected-plan UPI demo checkout."
+version = "1.0.0"
+id = "artifacts/neon-card-shop"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18282
+
+[services.development]
+run = "pnpm --filter @workspace/neon-card-shop run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/neon-card-shop", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/neon-card-shop/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18282"
+BASE_PATH = "/"
